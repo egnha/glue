@@ -19,7 +19,9 @@ bind_promises <- function(exprs, parent) {
 }
 
 as_promise <- function(expr, env) {
-  promise <- call("function", as.pairlist(expr), quote(environment()))
+  fmls <- expr
+  fmls[[1]] <- quote(expr = )
+  promise <- call("function", as.pairlist(fmls), quote(environment()))
   eval(as.call(c(promise, expr)), env)
 }
 
